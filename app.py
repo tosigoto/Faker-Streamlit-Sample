@@ -1,7 +1,6 @@
 import io
 import base64
 import streamlit as st
-import pandas as pd
 import xlsxwriter  # Excelファイル生成用
 from utils.data_generator import generate_customer_data
 
@@ -18,13 +17,7 @@ def main():
 
     # 顧客データの生成 (必要に応じてカスタマイズ)
     num_customers = st.slider("顧客人数", 100, 10000, 1000)
-    customer_data = generate_customer_data(num_customers)
-
-    # CSVファイルへの保存 (必要に応じて)
-    customer_data.to_csv("data/customers.csv", index=False)
-
-    # CSVファイルからデータを読み込む
-    df = pd.read_csv("data/customers.csv")
+    df = generate_customer_data(num_customers)
 
     st.write("生成された顧客データ")
     st.dataframe(df)
